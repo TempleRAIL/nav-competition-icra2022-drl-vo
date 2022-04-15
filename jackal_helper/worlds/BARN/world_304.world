@@ -1,0 +1,899 @@
+<?xml version="1.0" ?>
+    <sdf version="1.5">
+      <world name="default">
+        <!-- A global light source -->
+        <include>
+          <uri>model://sun</uri>
+        </include>
+        <!-- A ground plane -->
+        <include>
+          <uri>model://ground_plane</uri>
+        </include>
+
+        
+
+    <model name='libopen_space_final_T2B_148_40'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.29 0.26 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.29 0.26 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_148_40' filename='libopen_space_final_T2B_148_40.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_51_63'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.42 0.14 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.42 0.14 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_51_63' filename='libopen_space_final_T2B_51_63.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_111_18'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.42 0.28 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.42 0.28 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_111_18' filename='libopen_space_final_T2B_111_18.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_106_71'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.12 0.42 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.12 0.42 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_106_71' filename='libopen_space_final_T2B_106_71.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_113_82'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.18 0.18 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.18 0.18 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_113_82' filename='libopen_space_final_T2B_113_82.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_125_48'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.17 0.24 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.17 0.24 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_125_48' filename='libopen_space_final_T2B_125_48.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_92_34'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.10 0.15 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.10 0.15 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_92_34' filename='libopen_space_final_T2B_92_34.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_125_67'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.34 0.18 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.34 0.18 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_125_67' filename='libopen_space_final_T2B_125_67.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_123_20'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.23 0.46 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.23 0.46 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_123_20' filename='libopen_space_final_T2B_123_20.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_83_23'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.25 0.45 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.25 0.45 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_83_23' filename='libopen_space_final_T2B_83_23.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_56_75'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.11 0.45 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.11 0.45 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_56_75' filename='libopen_space_final_T2B_56_75.so'/>
+    </model>
+
+    <model name='libopen_space_final_T2B_91_29'>
+      <static>1</static>
+      <pose frame=''>-0.225000 0.075000 0.000000 0.000000 0.000000 0.000000</pose>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.24 0.18 1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.24 0.18 1</size>
+            </box>
+          </geometry>
+	    <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+	      <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+          </material>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <plugin name='libopen_space_final_T2B_91_29' filename='libopen_space_final_T2B_91_29.so'/>
+    </model>
+
+
+        <model name='bottom_wall'>
+          <static>1</static>
+          <pose frame=''>-2.25 0.5 0.000000 0.000000 0.000000 1.57079632</pose>
+          <link name='link'>
+            <inertial>
+            <mass>1</mass>
+            <inertia>
+              <ixx>0.145833</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.145833</iyy>
+              <iyz>0</iyz>
+              <izz>0.125</izz>
+            </inertia>
+            </inertial>
+            <collision name='collision'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <max_contacts>10</max_contacts>
+            <surface>
+              <contact>
+              <ode/>
+              </contact>
+              <bounce/>
+              <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+              </friction>
+            </surface>
+            </collision>
+            <visual name='visual'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+            <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+            </material>
+            <material>
+              <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              </script>
+            </material>
+            </visual>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <gravity>1</gravity>
+          </link>
+        </model>
+
+        <model name='left_wall'>
+          <static>1</static>
+          <pose frame=''>-9 7.25 0.000000 0.000000 0.000000 0.000000</pose>
+          <link name='link'>
+            <inertial>
+            <mass>1</mass>
+            <inertia>
+              <ixx>0.145833</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.145833</iyy>
+              <iyz>0</iyz>
+              <izz>0.125</izz>
+            </inertia>
+            </inertial>
+            <collision name='collision'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <max_contacts>10</max_contacts>
+            <surface>
+              <contact>
+              <ode/>
+              </contact>
+              <bounce/>
+              <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+              </friction>
+            </surface>
+            </collision>
+            <visual name='visual'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+            <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+            </material>
+            <material>
+              <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              </script>
+            </material>
+            </visual>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <gravity>1</gravity>
+          </link>
+        </model>
+
+        <model name='right_wall'>
+          <static>1</static>
+          <pose frame=''>4.5 7.25 0.000000 0.000000 0.000000 0.000000</pose>
+          <link name='link'>
+            <inertial>
+            <mass>1</mass>
+            <inertia>
+              <ixx>0.145833</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.145833</iyy>
+              <iyz>0</iyz>
+              <izz>0.125</izz>
+            </inertia>
+            </inertial>
+            <collision name='collision'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <max_contacts>10</max_contacts>
+            <surface>
+              <contact>
+              <ode/>
+              </contact>
+              <bounce/>
+              <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+              </friction>
+            </surface>
+            </collision>
+            <visual name='visual'>
+            <geometry>
+              <box>
+              <size>0.1 13.5 1</size>
+              </box>
+            </geometry>
+            <material>
+              <ambient>0.152000 0.379000 0.720000 1</ambient>
+            <diffuse>0.152000 0.379000 0.720000 1</diffuse>
+            </material>
+            <material>
+              <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              </script>
+            </material>
+            </visual>
+            <self_collide>0</self_collide>
+            <kinematic>0</kinematic>
+            <gravity>1</gravity>
+          </link>
+        </model>
+
+      </world>
+    </sdf>"

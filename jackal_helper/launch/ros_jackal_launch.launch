@@ -1,0 +1,66 @@
+<launch>
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui" default="false" />
+  <arg name="headless" default="true" />
+  <arg name="verbose" default="true" />
+  <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS" />
+  <arg name="world_name" default="$(find jackal_helper)/worlds/jackal_race.world" />
+
+  <!-- Short-term hack to support the original front_laser:=true argument for spawning
+       the simulator. This will be removed in favour of using the config:=x arg instead. -->
+  <arg name="front_laser" default="true" />
+  <arg name="default_config" value="front_laser" if="$(arg front_laser)" />
+  <arg name="default_config" value="base" unless="$(arg front_laser)" />
+  <arg name="console_conf" value="verbose.conf" if="$(arg verbose)" />
+  <arg name="console_conf" value="non_verbose.conf" unless="$(arg verbose)" />
+  <!-- end of hack -->
+
+  <!-- Configureation of the logger level-->
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find jackal_helper)/configs/$(arg console_conf)"/>
+
+  <!-- Configuration of Jackal which you would like to simulate.
+       See jackal_description for details. -->
+  <arg name="config" default="$(arg default_config)" />
+
+  <!-- Optionally enable teleop for the simulation -->
+  <arg name="joystick" default="false" />
+
+  <!-- Launch Gazebo with the specified world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="0" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="world_name" value="$(arg world_name)" />
+  </include>
+
+  <!-- Spawn Jackal -->
+  <include file="$(find jackal_gazebo)/launch/spawn_jackal.launch">
+    <arg name="x" value="0" />
+    <arg name="y" value="0" />
+    <arg name="z" value="1.0" />
+    <arg name="yaw" value="0" />
+    <arg name="config" value="$(arg config)" />
+    <arg name="joystick" value="$(arg joystick)" />
+  </include>
+
+  <!-- Start the navigation stack -->
+  <!-- The configuration files are loaded from jackal_helper -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+    <rosparam file="$(find jackal_helper)/configs/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find jackal_helper)/configs/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+
+    <rosparam file="$(find jackal_helper)/configs/params/odom_nav_params/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find jackal_helper)/configs/params/odom_nav_params/local_costmap_params.yaml" command="load" />
+
+    <rosparam file="$(find jackal_helper)/configs/params/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find jackal_helper)/configs/params/move_base_params.yaml" command="load" />
+
+    <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
+    <param name="base_local_planner" value="$(arg base_local_planner)"/>
+
+    <remap from="odom" to="odometry/filtered" />
+  </node>
+
+</launch>
