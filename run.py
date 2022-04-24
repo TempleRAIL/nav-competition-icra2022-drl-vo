@@ -186,6 +186,7 @@ class RUN_DRL_VO:
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = 'test BARN navigation challenge')
+    parser.add_argument('--world_idx', type=int, default=0)
     parser.add_argument('--gui', action="store_true")
     parser.add_argument('--out', type=str, default="out.txt")
     args = parser.parse_args()
@@ -204,13 +205,10 @@ if __name__ == "__main__":
     rospy.set_param('/use_sim_time', True)
 
     # initialize running test:
-    run_drl_vo = RUN_DRL_VO(world_idx=0, gui=args.gui, out_path=args.out)
+    run_drl_vo = RUN_DRL_VO(world_idx=args.world_idx, gui=args.gui, out_path=args.out)
 
-    # run tests:
-    for i in range(0,50):
-        world_idx = i*6
-        for j in range(0,10):
-            run_drl_vo.start_naviagtion(world_idx)
+    # run test:
+    run_drl_vo.start_naviagtion(args.world_idx)
     
     # close roscore:
     roscore_process.terminate()

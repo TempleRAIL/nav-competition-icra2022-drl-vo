@@ -9,6 +9,21 @@
 ## DRL-VO Control Policy
 * navigation metric: 0.2188
 
+### Run Simulations
+```
+# build container: 
+sudo singularity build --notest nav_competition_image.sif Singularityfile.def
+
+# single test:
+./singularity_run.sh /path/to/image/file python run.py --out ~/drl_vo_out.txt
+
+# 50 worlds test: 
+./singularity_run.sh /path/to/image/file python run_drl_vo.py --out ~/drl_vo_out.txt
+
+# report results:
+python report_test.py --out_path ~/out.txt
+```
+
 ## Requirements
 If you run it on a local machine without containers:
 * ROS version at least Kinetic

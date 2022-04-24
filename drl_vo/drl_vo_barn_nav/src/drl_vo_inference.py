@@ -42,7 +42,7 @@ from move_base import MoveBase
 # global variables are listed here
 #
 #-----------------------------------------------------------------------------
-set_seed(SEED1)
+#set_seed(SEED1)
 
 # for reproducibility, we seed the rng
 #       

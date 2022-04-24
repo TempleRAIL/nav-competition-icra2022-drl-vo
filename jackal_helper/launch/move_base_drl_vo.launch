@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model_file"   default="$(find drl_barn_nav)/src/model/drl_vo.zip"/>
+  <arg name="model_file"   default="$(find drl_vo_barn_nav)/src/model/drl_vo.zip"/>
   <arg name="start" default="true" />
   <arg name="goal_x" default="0" />
   <arg name="goal_y" default="10" />
