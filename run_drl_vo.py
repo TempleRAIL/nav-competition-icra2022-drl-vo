@@ -188,6 +188,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = 'test BARN navigation challenge')
     parser.add_argument('--gui', action="store_true")
     parser.add_argument('--out', type=str, default="out.txt")
+    parser.add_argument('--trials', type=int, default=1)
     args = parser.parse_args()
 
     # environment parameters:
@@ -207,9 +208,9 @@ if __name__ == "__main__":
     run_drl_vo = RUN_DRL_VO(world_idx=0, gui=args.gui, out_path=args.out)
 
     # run tests:
-    for i in range(0,50):
+    for i in range(0, 50):
         world_idx = i*6
-        for j in range(0,10):
+        for j in range(0, args.trials):
             run_drl_vo.start_naviagtion(world_idx)
     
     # close roscore:

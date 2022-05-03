@@ -150,7 +150,7 @@ class DrlInference:
                 self.observation = np.concatenate((ped_pos, self.scan, self.goal), axis=None) 
 
                 # drl-vo infrence: calculate the goal velocity of the robot and send the command
-                action, _states = self.model.predict(self.observation)
+                action, _states = self.model.predict(self.observation, deterministic=True)
 
                 # velocities:
                 vx_min = 0

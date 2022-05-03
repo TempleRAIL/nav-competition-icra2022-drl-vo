@@ -7,7 +7,7 @@
 # ICRA 2022 BARN Challenge
 
 ## DRL-VO Control Policy
-* navigation metric: 0.2188
+* navigation metric: 0.2339
 
 ### Run Simulations
 ```
@@ -18,14 +18,17 @@ git clone https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
 cd ./nav-competition-icra2022-drl-vo
 sudo singularity build --notest nav_competition_image.sif Singularityfile.def
 
-# single test:
+# single world test:
 ./singularity_run.sh ./nav_competition_image.sif python run.py --out ~/drl_vo_out.txt
 
-# 50 worlds test: 
-./singularity_run.sh ./nav_competition_image.sif python run_drl_vo.py --out ~/drl_vo_out.txt
+# 50 worlds test: 1 trial
+./singularity_run.sh ./nav_competition_image.sif python run_drl_vo.py --out ~/drl_vo_out.txt --trials 1
+
+# 50 worlds test: 10 trial
+./singularity_run.sh ./nav_competition_image.sif python run_drl_vo.py --out ~/drl_vo_out.txt --trials 10
 
 # report results:
-python report_test.py --out_path ~/out.txt
+python report_test.py --out_path ~/drl_vo_out.txt
 ```
 
 ## Requirements
