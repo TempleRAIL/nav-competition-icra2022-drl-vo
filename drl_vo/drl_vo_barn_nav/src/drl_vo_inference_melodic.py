@@ -66,7 +66,7 @@ class DrlInference:
         self.model = None
         
         # parameters:
-        self.start = rospy.get_param('~start', False)
+        self.start = rospy.get_param('~start', True)
         goal_x = rospy.get_param('~goal_x', 0)
         goal_y = rospy.get_param('~goal_y', 10)
 
@@ -79,10 +79,15 @@ class DrlInference:
         self.move_base.make_plan()
         self._clear_costmap()
     
+        # Might not need this dict in all cases
+        custom_objects = {
+            "lr_schedule": lambda x: .003,
+            "clip_range": lambda x: .02
+        }
         # load model:
         if(model == None):
             model_file = rospy.get_param('~model_file', "./model/drl_vo.zip")
-            self.model = PPO.load(model_file)
+            self.model = PPO.load(model_file, custom_objects=custom_objects)
         else:
             self.model = model
         print("Finish loading model.")

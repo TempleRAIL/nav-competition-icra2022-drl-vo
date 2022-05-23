@@ -1,0 +1,72 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/cuda:11.0.3-cudnn8-devel-ubuntu18.04
+
+%setup
+    mkdir -p ${SINGULARITY_ROOTFS}/jackal_ws/src
+
+%files
+    .bashrc_melodic /etc/
+    . /jackal_ws/src/nav-competition-icra2022-drl-vo
+
+%post -c /bin/bash
+    ln -snf /usr/share/zoneinfo/US/Eastern /etc/localtime
+    echo 'US/Eastern' > /etc/timezone 
+    apt-get update 
+    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends tzdata keyboard-configuration vim
+    
+    apt-get install -q -y --no-install-recommends lsb-release dirmngr gnupg2 python3-pip python-pip debconf-utils git
+    apt-get install -y mesa-utils libgl1-mesa-glx
+
+    sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+
+    apt install -y curl
+    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+    curl -s https://packages.clearpathrobotics.com/public.key -O - | apt-key add -
+    sh -c 'echo "deb https://packages.clearpathrobotics.com/stable/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/clearpath-latest.list'
+    curl -s https://raw.githubusercontent.com/clearpathrobotics/public-rosdistro/master/rosdep/50-clearpath.list -O /etc/ros/rosdep/sources.list.d/50-clearpath.list
+
+    apt-get update 
+    apt-get install -y ros-melodic-desktop-full
+    
+    source /opt/ros/melodic/setup.bash
+    apt install -y python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+    rosdep init; rosdep update
+
+    apt-get install -y ros-melodic-lms1xx
+    apt-get install -y ros-melodic-rosserial
+    apt-get install -y ros-melodic-rosserial-server
+    apt-get install -y ros-melodic-nmea-msgs
+    apt-get install -y ros-melodic-velodyne-simulator
+    apt-get install -y ros-melodic-pointgrey-camera*
+    apt-get install -y ros-melodic-controller-manager
+    apt-get install -y ros-melodic-twist-mux
+    apt-get install -y ros-melodic-teleop-twist-joy
+    apt-get install -y ros-melodic-joint-state-controller
+    apt-get install -y ros-melodic-diff-drive-controller
+    apt-get install -y ros-melodic-robot-localization
+    apt-get install -y ros-melodic-interactive-marker-twist-server 
+    apt-get install -y ros-melodic-jackal*
+
+    rm -rf /var/lib/apt/lists/*
+
+    chmod -R u+rwx /jackal_ws
+    cd /jackal_ws/src
+    git clone https://github.com/jackal/jackal_desktop.git --branch melodic-devel
+    git clone https://github.com/jackal/jackal_robot.git --branch melodic-devel
+    
+    source /opt/ros/melodic/setup.bash
+    cd ..
+    catkin_make
+    source /etc/.bashrc_melodic
+
+    apt-get update 
+    apt-get install -y python3-venv 
+    python3 -m venv /venv
+    export PATH="/venv/bin:$PATH"
+    /venv/bin/pip3 install --upgrade pip
+    /venv/bin/pip3 install defusedxml rospkg netifaces catkin_pkg rospkg pyyaml numpy exception
+    
+    /venv/bin/pip3 install torch==1.7.1+cu110 -f https://download.pytorch.org/whl/torch_stable.html 
+    /venv/bin/pip3 install gym==0.18.0 Pillow==7.0.0 cloudpickle==1.6.0 pickle5
+    /venv/bin/pip3 install stable-baselines3==1.1.0
+

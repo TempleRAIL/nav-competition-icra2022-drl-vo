@@ -9,7 +9,8 @@
 ## DRL-VO Control Policy
 * navigation metric: 0.2339
 
-### Run Simulations
+### Run Simulations: Noetic 
+# install Singularity 
 ```
 # clone this project:
 git clone https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
@@ -30,6 +31,8 @@ sudo singularity build --notest nav_competition_image.sif Singularityfile.def
 # report results:
 python report_test.py --out_path ~/drl_vo_out.txt
 ```
+
+--------------------------------------------------------------------------------
 
 ## Requirements
 If you run it on a local machine without containers:
