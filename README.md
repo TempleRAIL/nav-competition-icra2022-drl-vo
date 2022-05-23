@@ -10,7 +10,7 @@
 * navigation metric: 0.2339
 
 ### Run Simulations: Noetic 
-# install Singularity 
+#### install Singularity 
 ```
 # clone this project:
 git clone https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
