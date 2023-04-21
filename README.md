@@ -21,12 +21,14 @@ The details of BARN Challenge can be found at our paper ["Autonomous Ground Navi
 * Singularity 
 
 ## Usage:
+Download pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7851293) container to the home directory
 ```
 # clone this project:
 git clone -b barn_2023 https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
 cd nav-competition-icra2022-drl-vo
 
-# download pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7851293) container to the current directory
+# move nav_competition_image.sif container to current directory:
+mv ~/nav_competition_image.sif ./
 
 # single world test:
 ./singularity_run.sh ./nav_competition_image.sif python run.py --out ~/drl_vo_out.txt
