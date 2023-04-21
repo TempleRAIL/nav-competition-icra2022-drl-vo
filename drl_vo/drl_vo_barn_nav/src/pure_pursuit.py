@@ -4,7 +4,6 @@ import rospy
 from nav_msgs.msg import Path
 from geometry_msgs.msg import Twist, PoseStamped
 import tf
-from scipy.optimize import linprog
 from geometry_msgs.msg import Point
 
 
