@@ -2,10 +2,8 @@
 import numpy as np
 from random import choice
 import rospy
-import tf
 from barn_msgs.msg import BARN_data
 from geometry_msgs.msg import Point, PoseStamped, Twist, TwistStamped
-from scipy.optimize import linprog
 from sensor_msgs.msg import LaserScan
 
 # parameters:

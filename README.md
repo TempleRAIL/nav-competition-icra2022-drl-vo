@@ -32,14 +32,14 @@ sudo singularity build --notest nav_competition_image.sif Singularityfile.def
 # single world test:
 ./singularity_run.sh ./nav_competition_image.sif python run.py --out ~/drl_vo_out.txt
 
-# 50 worlds test: 1 trial
+# 50 worlds test: 1 trial (faster)
 ./singularity_run.sh ./nav_competition_image.sif python run_drl_vo.py --out ~/drl_vo_out.txt --trials 1
 
-# 50 worlds test: 10 trial
+# 50 worlds test: 10 trial (much slower)
 ./singularity_run.sh ./nav_competition_image.sif python run_drl_vo.py --out ~/drl_vo_out.txt --trials 10
 
 # report results:
-python report_test.py --out_path ~/drl_vo_out.txt
+./singularity_run.sh ./nav_competition_image.sif python report_test.py --out_path ~/drl_vo_out.txt
 ```
 
 --------------------------------------------------------------------------------

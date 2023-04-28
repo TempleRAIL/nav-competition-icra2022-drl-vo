@@ -64,6 +64,30 @@ class DrlInference:
         self.vx = 0
         self.wz = 0
         self.model = None
+
+        # jackal robot distance:
+        delta = 0.375*np.pi/180
+        b_l = 0.165
+        b_f = 0.145
+        b_r = 0.165
+        theta1 = np.linspace(120, 0, num=121)*delta
+        theta2 = np.linspace(1, 109, num=109)*delta
+        theta3 = np.linspace(129, 0, num=130)*delta
+        theta4 = np.linspace(1, 130, num=130)*delta
+        theta5 = np.linspace(109, 1, num=109)*delta
+        theta6 = np.linspace(0, 120, num=121)*delta
+        robot_c1 = b_l/np.cos(theta1)
+        robot_c2 = b_l/np.cos(theta2)
+        robot_c3 = b_f/np.cos(theta3)
+        robot_c4 = b_f/np.cos(theta4)
+        robot_c5 = b_r/np.cos(theta5)
+        robot_c6 = b_r/np.cos(theta6)
+        self.jackal_dis = np.concatenate((robot_c1, robot_c2, robot_c3, robot_c4, robot_c5, robot_c6), axis=None)
+
+        # turtlebot robot distance:
+        robot_l = np.linspace(0.1*np.sqrt(3), 0.1, num=361)
+        robot_r = np.linspace(0.10020335, 0.1*np.sqrt(3), num=359) 
+        self.turtlebot_dis = np.concatenate((robot_l, robot_r), axis=None)
         
         # parameters:
         self.start = rospy.get_param('~start', False)
@@ -82,14 +106,14 @@ class DrlInference:
         # load model:
         if(model == None):
             model_file = rospy.get_param('~model_file', "./model/drl_vo.zip")
-            self.model = PPO.load(model_file)
+            self.model = PPO.load(model_file, device="cpu")
         else:
             self.model = model
         print("Finish loading model.")
 
         # initialize ROS objects
-        self.barn_data_sub = rospy.Subscriber("/barn_data", BARN_data, self.barn_data_callback, queue_size=2, buff_size=2**24)
-        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10, latch=False)
+        self.barn_data_sub = rospy.Subscriber("/barn_data", BARN_data, self.barn_data_callback, queue_size=1, buff_size=2**24)
+        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1, latch=False)
         
     # Callback function for the barn_data subscriber
     def barn_data_callback(self, barn_data_msg):
@@ -124,7 +148,7 @@ class DrlInference:
                 # min-avg pooling:
                 scan_avg = np.zeros((20,80))
                 for n in range(10):
-                    scan_tmp = laser_scan[n*720:(n+1)*720]
+                    scan_tmp = laser_scan[n*720:(n+1)*720] - self.jackal_dis + self.turtlebot_dis
                     for i in range(80):
                         scan_avg[2*n, i] = np.min(scan_tmp[i*9:(i+1)*9])
                         scan_avg[2*n+1, i] = np.mean(scan_tmp[i*9:(i+1)*9])
