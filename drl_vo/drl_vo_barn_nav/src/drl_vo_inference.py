@@ -189,6 +189,7 @@ class DrlInference:
         w_max = 2
         v_max = 0.5
         v_cmd = w_cmd = 0.
+
         if(R == 0):
             v_cmd = 0.
             w_cmd = w_max / np.sign(R)
@@ -198,6 +199,7 @@ class DrlInference:
         else:
             v_cmd = np.sign(goal[0]) * 1
             w_cmd = v_cmd / R
+            
         r = 0.098 #self.wheel_radius
         L = 0.262 #self.wheel_base
         u = v_cmd / r + L * w_cmd / (2. * r) * np.array([-1, 1])
@@ -205,7 +207,7 @@ class DrlInference:
         u = u * u_limit / (max(abs(u[0]), abs(u[1])) + 1e-8)
         v = r / 2. * (u[0] + u[1])
         w = r / L * (u[1] - u[0])
-        print(v, w)
+
         return (v, w)
 
     #
