@@ -24,9 +24,8 @@ class PurePursuit:
         #self.goal_sub = rospy.Subscriber("/move_base/current_goal", PoseStamped, self.goal_callback)
         self.path_sub = rospy.Subscriber('move_base/NavfnROS/plan', Path, self.path_callback)
         self.tf_listener = tf.TransformListener()
-        #self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+        #self.cmd_vel_pub = rospy.Publisher('pp_cmd_vel', Twist, queue_size=1)
         self.cnn_goal_pub = rospy.Publisher('cnn_goal', Point, queue_size=1)#, latch=True)
-        self.final_goal_pub = rospy.Publisher('final_goal', Point, queue_size=1)#, latch=True)
     
     # Callback function for the path subscriber
     def path_callback(self, msg):
@@ -43,21 +42,6 @@ class PurePursuit:
     def start(self):
         # initialize timer for controller update
         self.timer = rospy.Timer(rospy.Duration(1./self.rate), self.timer_callback)
-    
-    # Get the current pose of the robot from the tf tree
-    def get_current_pose(self):
-        trans = rot = None
-        # look up the current pose of the base_footprint using the tf tree
-        try:
-            (trans,rot) = self.tf_listener.lookupTransform('/odom', '/base_link', rospy.Time(0))
-        except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-            rospy.logwarn('Could not get robot pose')
-            return (np.array([np.nan, np.nan]), np.nan)
-        x = np.array([trans[0], trans[1]])
-        (roll, pitch, theta) = tf.transformations.euler_from_quaternion(rot)
-        rospy.logdebug("x = {}, y = {}, theta = {}".format(x[0], x[1], theta))
-        
-        return (x, theta)
     
     # Find the closest point on the current path to the point x
     # Inputs: 
@@ -184,7 +168,7 @@ class PurePursuit:
             trans = rot = None
             # look up the current pose of the base_footprint using the tf tree
             try:
-                (trans,rot) = self.tf_listener.lookupTransform('/odom', '/base_link', rospy.Time(0))
+                (trans,rot) = self.tf_listener.lookupTransform('map', 'base_link', rospy.Time(0))
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 rospy.logwarn('Could not get robot pose')
                 return (np.array([np.nan, np.nan]), np.nan)
@@ -216,14 +200,7 @@ class PurePursuit:
 
         goal = np.matmul(np.linalg.inv(map_T_robot), np.array([[goal[0]],[goal[1]],[1]])) #np.dot(np.linalg.inv(map_T_robot), np.array([goal[0], goal[1],1])) #
         goal = goal[0:2]
-        ##### YOUR CODE ENDS HERE #####
-
-        # final relative goal:
-        relative_goal = np.matmul(np.linalg.inv(map_T_robot), np.array([[end_goal_pos[0]],[end_goal_pos[1]],[1]])) 
-        # Compute the difference to the goal orientation
-        orientation_to_target = tf.transformations.quaternion_multiply(end_goal_rot, \
-                tf.transformations.quaternion_inverse(rot))
-        yaw = tf.transformations.euler_from_quaternion(orientation_to_target)[2]     
+        ##### YOUR CODE ENDS HERE #####  
 	
         # publish the cnn goal:
         cnn_goal = Point()
@@ -231,15 +208,8 @@ class PurePursuit:
         cnn_goal.y = goal[1]
         cnn_goal.z = 0
         if not np.isnan(cnn_goal.x) and not np.isnan(cnn_goal.y): # ensure data is valid
-                self.cnn_goal_pub.publish(cnn_goal)
+            self.cnn_goal_pub.publish(cnn_goal)
 
-        # publish the final goal:
-        final_goal = Point()
-        final_goal.x = relative_goal[0]
-        final_goal.y = relative_goal[1]
-        final_goal.z = yaw
-        if not np.isnan(final_goal.x) and not np.isnan(final_goal.y): # ensure data is valid
-                self.final_goal_pub.publish(final_goal)
         
 if __name__ == '__main__':
     try:

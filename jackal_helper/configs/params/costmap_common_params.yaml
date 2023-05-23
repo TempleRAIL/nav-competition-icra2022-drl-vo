@@ -14,12 +14,17 @@ footprint: [[-0.21, -0.165], [-0.21, 0.165], [0.21, 0.165], [0.21, -0.165]]
 footprint_padding: 0.1
 
 plugins:
+- {name: static_layer, type: "costmap_2d::StaticLayer"}
 - {name: obstacles_layer, type: "costmap_2d::ObstacleLayer"}
 - {name: inflater_layer, type: "costmap_2d::InflationLayer"}
 
 obstacles_layer:
+  unknown_threshold:    15
+  track_unknown_space:  true    #true needed for disabling global path planning through unknown space
   observation_sources: scan
   scan: {sensor_frame: front_laser, data_type: LaserScan, topic: front/scan, marking: true, clearing: true, min_obstacle_height: -2.0, max_obstacle_height: 2.0, obstacle_range: 8, raytrace_range: 8.5}
 
-inflater_layer:
- inflation_radius: 0.31 #0.30
+inflation_layer:
+  cost_scaling_factor:  5.0  # exponential rate at which the obstacle cost drops off (default: 10)
+  inflation_radius:     0.31 # max. distance from an obstacle at which costs are incurred for planning paths.
+

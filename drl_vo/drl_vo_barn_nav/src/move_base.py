@@ -18,7 +18,7 @@ def _create_MoveBaseGoal(x, y, angle):
     Returns a MoveBaseGoal
     """
     mb_goal = MoveBaseGoal()
-    mb_goal.target_pose.header.frame_id = 'odom' # Note: the frame_id must be map
+    mb_goal.target_pose.header.frame_id = 'map' # Note: the frame_id must be map
     mb_goal.target_pose.pose.position.x = x
     mb_goal.target_pose.pose.position.y = y
     mb_goal.target_pose.pose.position.z = 0 # z must be 0.0 (no height in the map)
@@ -32,7 +32,7 @@ def _create_PoseWithCovarianceStamped():
     Create initial pose in odometery frame (used to reset)
     """
     a = PoseWithCovarianceStamped()
-    a.header.frame_id = 'odom'
+    a.header.frame_id = 'map'
     a.pose.pose.position.x = 0.0
     a.pose.pose.position.y = 0.0
     a.pose.pose.position.z = 0.0
@@ -132,7 +132,7 @@ class MoveBase():
         # get_plan = GetPlan()
 
         start = PoseStamped()
-        start.header.frame_id = "odom"
+        start.header.frame_id = "map"
         start.pose.position.x = self.robot_config.X
         start.pose.position.y = self.robot_config.Y
         start.pose.position.z = self.robot_config.Z
@@ -144,7 +144,7 @@ class MoveBase():
 
         goal = PoseStamped()
         x, y, angle = self.goal_position
-        goal.header.frame_id = "odom"
+        goal.header.frame_id = "map"
         goal.pose.position.x = x
         goal.pose.position.y = y
         goal.pose.position.z = 0

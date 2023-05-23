@@ -1,10 +1,52 @@
 <launch>
   <arg name="model_file"   default="$(find drl_vo_barn_nav)/src/model/drl_vo.zip"/>
   <arg name="start" default="true" />
-  <arg name="goal_x" default="0" />
-  <arg name="goal_y" default="10" />
+  <arg name="goal_x" default="-10" />
+  <arg name="goal_y" default="20" />
 
   <!-- Start the navigation stack -->
+  <arg name="scan_topic"  default="front/scan" />
+  <arg name="base_frame"  default="base_link"/>
+  <arg name="odom_frame"  default="odom"/>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="log">
+      <remap from="scan" to="$(arg scan_topic)"/>
+	  <param name="base_frame" value="$(arg base_frame)"/>
+      <param name="odom_frame" value="$(arg odom_frame)"/>
+      <param name="map_update_interval" value="10.0"/>
+      <param name="maxUrange" value="18.0"/>
+      <param name="sigma" value="0.05"/>
+      <param name="kernelSize" value="1"/>
+      <param name="lstep" value="0.05"/>
+      <param name="astep" value="0.05"/>
+      <param name="iterations" value="5"/>
+      <param name="lsigma" value="0.075"/>
+      <param name="ogain" value="3.0"/>
+      <param name="lskip" value="0"/>
+      <param name="srr" value="0.01"/>
+      <param name="srt" value="0.02"/>
+      <param name="str" value="0.01"/>
+      <param name="stt" value="0.02"/>
+      <param name="linearUpdate" value="0.5"/>
+      <param name="angularUpdate" value="0.436"/>
+      <param name="temporalUpdate" value="-1.0"/>
+      <param name="resampleThreshold" value="0.5"/>
+      <param name="particles" value="80"/>
+      <param name="xmin" value="-5.0"/>
+      <param name="ymin" value="-5.0"/>
+      <param name="xmax" value="5.0"/>
+      <param name="ymax" value="15.0"/>
+      <param name="delta" value="0.05"/>
+      <param name="llsamplerange" value="0.01"/>
+      <param name="llsamplestep" value="0.01"/>
+      <param name="lasamplerange" value="0.005"/>
+      <param name="lasamplestep" value="0.005"/>
+   </node>
+
+  <arg name="odom_frame_id"   default="odom"/>
+  <arg name="base_frame_id"   default="base_link"/>
+  <arg name="global_frame_id" default="map"/>
+
   <!-- The configuration files are loaded from jackal_helper -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 
@@ -19,6 +61,13 @@
 
     <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+
+    <!-- reset frame_id parameters using user input data -->
+    <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="local_costmap/global_frame" value="$(arg global_frame_id)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame_id)"/>
+    <param name="TrajectoryPlannerROS/global_frame_id" value="$(arg global_frame_id)"/>
 
     <remap from="odom" to="odometry/filtered" />
     <remap from="cmd_vel" to="dwa/cmd_vel" />

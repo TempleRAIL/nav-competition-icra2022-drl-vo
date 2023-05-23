@@ -32,8 +32,6 @@ from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Point
 from stable_baselines3 import PPO
 from custom_cnn_full import *
-from move_base import MoveBase
-
 
 #-----------------------------------------------------------------------------
 #
@@ -91,17 +89,6 @@ class DrlInference:
         
         # parameters:
         self.start = rospy.get_param('~start', False)
-        goal_x = rospy.get_param('~goal_x', 0)
-        goal_y = rospy.get_param('~goal_y', 10)
-
-        # launch move_base:
-        self.goal_position = [goal_x, goal_y, 0]
-        self.base_local_planner = "base_local_planner/TrajectoryPlannerROS"
-        self.move_base = MoveBase(goal_position=self.goal_position, base_local_planner=self.base_local_planner)
-        # make plan: 
-        self.move_base.reset_robot_in_odom()
-        self.move_base.make_plan()
-        self._clear_costmap()
     
         # load model:
         if(model == None):
@@ -112,14 +99,13 @@ class DrlInference:
         print("Finish loading model.")
 
         # initialize ROS objects
-        self.barn_data_sub = rospy.Subscriber("/barn_data", BARN_data, self.barn_data_callback, queue_size=1, buff_size=2**24)
-        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1, latch=False)
+        self.barn_data_sub = rospy.Subscriber("barn_data", BARN_data, self.barn_data_callback, queue_size=1, buff_size=2**24)
+        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1, latch=False)
         
     # Callback function for the barn_data subscriber
     def barn_data_callback(self, barn_data_msg):
         self.scan = barn_data_msg.scan
         self.goal = barn_data_msg.goal_cart
-        self.move_base.make_plan()  
         cmd_vel = Twist()
 
         if(self.start): # start navigation  
@@ -130,15 +116,18 @@ class DrlInference:
                 min_scan_dist = np.amin(scan)
             else:
                 min_scan_dist = 10
-        
+            
             # if the goal is close to the robot:
             if(np.linalg.norm(self.goal) <= 0.9):  # goal margin
                 cmd_vel.linear.x = 0
                 cmd_vel.angular.z = 0
             elif(min_scan_dist <= 0.45): # obstacle margin
-                cmd_vel.linear.x = 0
+                cmd_vel.linear.x = 0 
                 cmd_vel.angular.z = 0.7
             else:
+                # purepursit cmd:
+                (v_pp, w_pp) = self.calculate_velocity(np.array([self.goal[0], self.goal[1]]))
+
                 # ped_map:
                 ped_pos = np.zeros(12800)
 
@@ -177,25 +166,48 @@ class DrlInference:
                 # velocities:
                 vx_min = 0
                 if(min_scan_dist >= 2.2): # free space margin
-                    vx_max = 2
+                    vx_max = 0.5 #2
                 else:
                     vx_max = 0.5 
                 vz_min = -0.7
                 vz_max = 0.7
+
                 # MaxAbsScaler inverse:
-                cmd_vel.linear.x = (action[0] + 1) * (vx_max - vx_min) / 2 + vx_min
-                cmd_vel.angular.z = (action[1] + 1) * (vz_max - vz_min) / 2 + vz_min
+                v_drl = (action[0] + 1) * (vx_max - vx_min) / 2 + vx_min
+                w_drl = (action[1] + 1) * (vz_max - vz_min) / 2 + vz_min
+
+                cmd_vel.linear.x = 0.6*v_drl + 0.4*v_pp
+                cmd_vel.angular.z = 0.8*w_drl + 0.2*w_pp
         
         # publish the cmd_vel:
         if not np.isnan(cmd_vel.linear.x) and not np.isnan(cmd_vel.angular.z): # ensure data is valid
             self.cmd_vel_pub.publish(cmd_vel)
-    
-    def _clear_costmap(self):
-        self.move_base.clear_costmap()
-        rospy.sleep(0.1)
-        self.move_base.clear_costmap()
-        rospy.sleep(0.1)
-        self.move_base.clear_costmap()
+
+    def calculate_velocity(self, goal):
+        # calculate the radius of curvature
+        R = np.dot(goal, goal) / (2. * goal[1] + 1e-8)
+        w_max = 2
+        v_max = 0.5
+        v_cmd = w_cmd = 0.
+        if(R == 0):
+            v_cmd = 0.
+            w_cmd = w_max / np.sign(R)
+        elif(R >= 1e8):
+            v_cmd = v_max
+            w_cmd = 0.0
+        else:
+            v_cmd = np.sign(goal[0]) * 1
+            w_cmd = v_cmd / R
+        r = 0.098 #self.wheel_radius
+        L = 0.262 #self.wheel_base
+        u = v_cmd / r + L * w_cmd / (2. * r) * np.array([-1, 1])
+        u_limit = min(v_max, w_max * L) / r
+        u = u * u_limit / (max(abs(u[0]), abs(u[1])) + 1e-8)
+        v = r / 2. * (u[0] + u[1])
+        w = r / L * (u[1] - u[0])
+        print(v, w)
+        return (v, w)
+
     #
     # end of function
 

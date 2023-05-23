@@ -1,8 +1,8 @@
 <launch>
   <arg name="use_sim_time" default="true" />
-  <arg name="gui" default="false" />
+  <arg name="gui" default="true" />
   <arg name="headless" default="true" />
-  <arg name="world_name" default="$(find jackal_helper)/worlds/jackal_race.world" />
+  <arg name="world_name" default="$(find jackal_helper)/worlds/world_2_new_simple.world" />
 
   <!-- Short-term hack to support the original front_laser:=true argument for spawning
        the simulator. This will be removed in favour of using the config:=x arg instead. -->

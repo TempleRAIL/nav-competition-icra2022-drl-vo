@@ -8,8 +8,13 @@
   <node name="drl_vo_cmd" pkg="drl_vo_barn_nav" type="drl_vo_inference.py" output="screen">
     <param name="model_file" value="$(arg model_file)" type="string"/>
     <param name="start" value="$(arg start)" type="bool" />
+  </node>
+
+  <!-- Goal publisher -->
+  <node name="publish_goal" pkg="drl_vo_barn_nav" type="publish_goal.py" output="screen">
     <param name="goal_x" value="$(arg goal_x)" />
     <param name="goal_y" value="$(arg goal_y)" />
   </node>
+
 
 </launch>
