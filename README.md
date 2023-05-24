@@ -55,6 +55,7 @@ source /etc/.bashrc
 mkdir -p temple_ws/src
 cd temple_ws/src
 git clone -b hardware https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
+cd ..
 catkin_make
 source devel/setup.sh
 
