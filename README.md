@@ -1,6 +1,6 @@
 <p align="center">
   <img width = "100%" src='res/BARN_Challenge.png' />
-  </p>
+</p>
 
 --------------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ The details of BARN Challenge can be found at our paper ["Autonomous Ground Navi
 * Singularity 
 
 ## Usage:
-Download pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7851293) container to the home directory.
+First download pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7968623) container to the home directory.
 ### Simulation:
 ```
 # clone this project:
@@ -46,23 +46,36 @@ mv ~/nav_competition_image.sif ./
 ```
 ### Hardware:
 ```
+# enter the directory of nav_competition_image.sif container and run the container: home directory
+cd ~
+singularity shell --nv nav_competition_image.sif
+source /etc/.bashrc
+
+# set the appropriate goal point and run the DRL-VO policy: the robot's initial local coordinate system when the robot is powered on (right hand rule)
+roslaunch jackal_helper move_base_drl_vo.launch goal_x:="20" goal_y:="15"
+```
+### Modify code in hardware:
+```
 # enter the directory of nav_competition_image.sif container and run the container:
 cd ~
 singularity shell --nv nav_competition_image.sif
 source /etc/.bashrc
 
 # create ros workspace and clone this project:
-mkdir -p temple_ws/src
-cd temple_ws/src
+mkdir -p jackal_ws/src
+cd jackal_ws/src
 git clone -b hardware https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
+
+# modify the corresponding code as needed
+
+# compile:
 cd ..
 catkin_make
 source devel/setup.sh
 
-# set the goal point and run the DRL-VO policy: Cartesian coordinate system (the positive direction of the x-axis is to the right, and the positive direction of the y-axis is forward)
-roslaunch jackal_helper move_base_drl_vo.launch goal_x:="-10" goal_y:="20"
+# set the appropriate goal point and run the DRL-VO policy: the robot's initial local coordinate system when the robot is powered on (right hand rule)
+roslaunch jackal_helper move_base_drl_vo.launch goal_x:="20" goal_y:="15"
 ```
-
 --------------------------------------------------------------------------------
 ## Citation
 ```
