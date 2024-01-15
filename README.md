@@ -9,9 +9,9 @@
 Our DRL-VO control policy ranked 1st in the simulated competition and 3rd in the final physical competition of the ICRA 2022 BARN Challenge.
 Implementation details can be found in our paper ["DRL-VO: Learning to Navigate Through Crowded Dynamic Scenes Using Velocity Obstacles"](https://doi.org/10.1109/TRO.2023.3257549
 )([arXiv](https://arxiv.org/pdf/2301.06512.pdf)) in IEEE Transactions on Robotics (T-RO) 2023. 
-Video demos can be found at [multimedia demonstrations](https://www.youtube.com/watch?v=KneELRT8GzU&list=PLouWbAcP4zIvPgaARrV223lf2eiSR-eSS&index=2&ab_channel=PhilipDames).
+Video demos can be found at [multimedia demonstrations](https://www.youtube.com/watch?v=KneELRT8GzU&list=PLouWbAcP4zIvPgaARrV223lf2eiSR-eSS&index=2&ab_channel=PhilipDames). The original training and implementation code can be found in our [drl_vo_nav](https://github.com/TempleRAIL/drl_vo_nav.git) repository. 
 
-The details of BARN Challenge can be found in our paper ["Autonomous Ground Navigation in Highly Constrained Spaces: Lessons Learned From the Benchmark Autonomous Robot Navigation Challenge at ICRA 2022 [Competitions]"](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9975161)
+The details of the BARN Challenge can be found in our paper ["Autonomous Ground Navigation in Highly Constrained Spaces: Lessons Learned From the Benchmark Autonomous Robot Navigation Challenge at ICRA 2022 [Competitions]"](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9975161)
 
 * navigation metric: 0.2339
 
@@ -22,11 +22,11 @@ The details of BARN Challenge can be found in our paper ["Autonomous Ground Navi
 * Singularity 
 
 ## Usage:
-First download pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7968623) container to the home directory.
+First, download the pre-created ["nav_competition_image.sif"](https://doi.org/10.5281/zenodo.7968623) container to the home directory.
 ### Simulation:
 ```
 # clone this project:
-git clone -b hardware https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
+git clone -b master https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
 cd nav-competition-icra2022-drl-vo
 
 # move nav_competition_image.sif container to current directory:
@@ -64,7 +64,7 @@ source /etc/.bashrc
 # create ros workspace and clone this project:
 mkdir -p jackal_ws/src
 cd jackal_ws/src
-git clone -b hardware https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
+git clone -b master https://github.com/TempleRAIL/nav-competition-icra2022-drl-vo.git
 
 # modify the corresponding code as needed
 
