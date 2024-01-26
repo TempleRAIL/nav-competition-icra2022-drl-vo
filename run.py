@@ -28,7 +28,7 @@ def path_coord_to_gazebo_coord(x, y):
         return (gazebo_x, gazebo_y)
 
 class RUN_DRL_VO:
-    def __init__(self, world_idx=0, gui=False, out_path="out.txt"):
+    def __init__(self, world_idx=0, gui=True, out_path="out.txt"):
         # parameters:
         self.gui = gui
         self.out_path = out_path
